@@ -118,15 +118,14 @@ import { useAuth } from '@/stores/useAuth'
 interface Payload {
   postId: string
   text: string
-  commentId?: string
-  parentId?: string
+  commentId: string
   parentReplyId?: string
 }
 const props = defineProps<{ comment: Comment }>()
 const emit = defineEmits<{
   (e: 'toggle-like-comment', payload: { id: string; type: 'comment' | 'reply' }): void
   (e: 'comment-reply', payload: Payload): void
-  (e: 'load-more-reply', payload: { commentId: string | undefined; parentId?: string }): void
+  (e: 'load-more-reply', payload: { commentId: string; parentId?: string }): void
   (e: 'delete-comment', id: string): void
   (e: 'delete-reply', id: string): void
 }>()
@@ -172,16 +171,10 @@ function submitReply() {
 }
 
 async function loadMoreReplies() {
-  const payload: { commentId: string; parentReplyId?: string } = {
-    commentId: '',
-    parentReplyId: undefined,
-  }
-  if (props.comment.commentId) {
-    payload.commentId = props.comment.commentId
-    payload.parentReplyId = props.comment._id
-  } else {
-    payload.commentId = props.comment._id
-  }
+  const payload: { commentId: string; parentReplyId?: string } = props.comment.commentId
+    ? { commentId: props.comment.commentId!, parentReplyId: props.comment._id }
+    : { commentId: props.comment._id }
+
   emit('load-more-reply', payload)
 }
 </script>
