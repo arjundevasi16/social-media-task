@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '@/views/LoginPage.vue'
 import Signup from '@/views/SignUpPage.vue'
 import { useAuth } from '@/stores/useAuth'
-import HomePage from '@/views/homePage.vue'
+import HomePage from '@/views/HomePage.vue'
 
 const routes = [
   {

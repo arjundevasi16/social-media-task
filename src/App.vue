@@ -10,6 +10,4 @@ import { useAuth } from './stores/useAuth'
   </main>
 </template>
 
-<style>
-@custom-variant dark (&:where(.dark, .dark *));
-</style>
+<style></style>
